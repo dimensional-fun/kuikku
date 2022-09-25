@@ -1,6 +1,6 @@
-package gay.quic.streams
+package dimensional.quic.streams
 
-import gay.quic.QuicConnection
+import dimensional.quic.QuicConnection
 
 public interface QuicStream {
     /**
@@ -12,5 +12,5 @@ public interface QuicStream {
     /**
      * The [QUIC connection][QuicConnection] this stream belongs to.
      */
-    public val connection: QuicConnection
+    public val connection: dimensional.quic.QuicConnection
 }

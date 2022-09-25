@@ -1,4 +1,4 @@
-package gay.quic.streams
+package dimensional.quic.streams
 
 public val Long.streamId: QuicStreamId get() = QuicStreamId(this)
 

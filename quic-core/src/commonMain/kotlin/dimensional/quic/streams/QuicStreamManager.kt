@@ -1,14 +1,14 @@
-package gay.quic.streams
+package dimensional.quic.streams
 
-import gay.quic.QuicConnection
-import gay.quic.QuicRole
+import dimensional.quic.QuicConnection
+import dimensional.quic.QuicRole
 
 public interface QuicStreamManager {
     /** The QUIC connection for this stream manager. */
-    public val connection: QuicConnection
+    public val connection: dimensional.quic.QuicConnection
 
     /** The role of this stream manager, e.g. client. */
-    public val role: QuicRole
+    public val role: dimensional.quic.QuicRole
 
     /** The number of available unidirectional streams. */
     public val availableUniStreams: Int

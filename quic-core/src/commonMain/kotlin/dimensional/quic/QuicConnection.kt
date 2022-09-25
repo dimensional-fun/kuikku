@@ -1,4 +1,4 @@
-package gay.quic
+package dimensional.quic
 
 public interface QuicConnection {
 }

@@ -1,4 +1,4 @@
-package gay.quic.streams
+package dimensional.quic.streams
 
 public enum class QuicStreamType {
     Bidirectional,

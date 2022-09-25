@@ -1,4 +1,4 @@
-package gay.quic.impl.tools
+package dimensional.quic.impl.tools
 
 import kotlin.experimental.and
 

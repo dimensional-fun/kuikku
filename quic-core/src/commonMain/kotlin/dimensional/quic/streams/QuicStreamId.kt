@@ -1,7 +1,7 @@
-package gay.quic.streams
+package dimensional.quic.streams
 
-import gay.quic.Quic
-import gay.quic.QuicRole
+import dimensional.quic.Quic
+import dimensional.quic.QuicRole
 import gay.quic.impl.tools.hasAnyFlags
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
@@ -17,21 +17,22 @@ public value class QuicStreamId(public val value: Long) {
         /** Calculate the max streams for the specified peer-role and stream type. */
         public fun calculateMaxStreams(
             initial: Int,
-            peer: QuicRole,
+            peer: dimensional.quic.QuicRole,
             type: QuicStreamType
         ): Int = (initial * 4) + when (peer) {
-            QuicRole.Client -> if (type.isUni())  2 else 3
-            QuicRole.Server -> if (type.isBidi()) 1 else 0
+            dimensional.quic.QuicRole.Client -> if (type.isUni())  2 else 3
+            dimensional.quic.QuicRole.Server -> if (type.isBidi()) 1 else 0
         }
     }
 
     private val isUni get() = value and 0x0002L == 0x0002L
 
     /** The [QUIC role][QuicRole] of this stream id */
-    public val role: QuicRole get() = if (value.hasAnyFlags(Quic.Stream.ServerBidi, Quic.Stream.ServerUni)) {
-        QuicRole.Server
+    public val role: dimensional.quic.QuicRole
+        get() = if (value.hasAnyFlags(dimensional.quic.Quic.Stream.ServerBidi, dimensional.quic.Quic.Stream.ServerUni)) {
+        dimensional.quic.QuicRole.Server
     } else {
-        QuicRole.Client
+        dimensional.quic.QuicRole.Client
     }
 
     /** The [type of stream][QuicStreamType] this ID belongs to */
@@ -42,8 +43,8 @@ public value class QuicStreamId(public val value: Long) {
      *
      * @param role Our QUIC role.
      */
-    public fun isPeerInitiated(role: QuicRole): Boolean {
-        return value.mod(2) == if (role == QuicRole.Client) 1 else 0
+    public fun isPeerInitiated(role: dimensional.quic.QuicRole): Boolean {
+        return value.mod(2) == if (role == dimensional.quic.QuicRole.Client) 1 else 0
     }
 
     override fun toString(): String = "$value"
@@ -51,9 +52,9 @@ public value class QuicStreamId(public val value: Long) {
     /**
      * A factory for [stream ids][QuicStreamId]
      */
-    public class Factory(role: QuicRole) {
+    public class Factory(role: dimensional.quic.QuicRole) {
         /** The initial values of all generated Stream IDs */
-        private val initial: Int = if (role == QuicRole.Server) SERVER_INITIATED else CLIENT_INITIATED
+        private val initial: Int = if (role == dimensional.quic.QuicRole.Server) SERVER_INITIATED else CLIENT_INITIATED
 
         /** The synchronization object*/
         private val lock = SynchronizedObject()
