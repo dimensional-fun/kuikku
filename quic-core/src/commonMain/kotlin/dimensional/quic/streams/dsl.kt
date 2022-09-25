@@ -1,5 +1,11 @@
 package dimensional.quic.streams
 
+
+public const val STREAM_CLIENT_BIDI: Int = 0x00
+public const val STREAM_SERVER_BIDI: Int = 0x01
+public const val STREAM_CLIENT_UNI:  Int = 0x02
+public const val STREAM_SERVER_UNI:  Int = 0x03
+
 public val Long.streamId: QuicStreamId get() = QuicStreamId(this)
 
 /**

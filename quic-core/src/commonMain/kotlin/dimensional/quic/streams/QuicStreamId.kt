@@ -16,22 +16,22 @@ public value class QuicStreamId(public val value: Long) {
         /** Calculate the max streams for the specified peer-role and stream type. */
         public fun calculateMaxStreams(
             initial: Int,
-            peer: dimensional.quic.QuicRole,
+            peer: QuicRole,
             type: QuicStreamType
         ): Int = (initial * 4) + when (peer) {
-            dimensional.quic.QuicRole.Client -> if (type.isUni())  2 else 3
-            dimensional.quic.QuicRole.Server -> if (type.isBidi()) 1 else 0
+            QuicRole.Client -> if (type.isUni())  2 else 3
+            QuicRole.Server -> if (type.isBidi()) 1 else 0
         }
     }
 
     private val isUni get() = value and 0x0002L == 0x0002L
 
     /** The [QUIC role][QuicRole] of this stream id */
-    public val role: dimensional.quic.QuicRole
-        get() = if (value.hasAnyFlags(dimensional.quic.Quic.Stream.ServerBidi, dimensional.quic.Quic.Stream.ServerUni)) {
-        dimensional.quic.QuicRole.Server
+    public val role: QuicRole
+        get() = if (value.hasAnyFlags(STREAM_SERVER_BIDI, STREAM_SERVER_UNI)) {
+        QuicRole.Server
     } else {
-        dimensional.quic.QuicRole.Client
+        QuicRole.Client
     }
 
     /** The [type of stream][QuicStreamType] this ID belongs to */
@@ -42,8 +42,8 @@ public value class QuicStreamId(public val value: Long) {
      *
      * @param role Our QUIC role.
      */
-    public fun isPeerInitiated(role: dimensional.quic.QuicRole): Boolean {
-        return value.mod(2) == if (role == dimensional.quic.QuicRole.Client) 1 else 0
+    public fun isPeerInitiated(role: QuicRole): Boolean {
+        return value.mod(2) == if (role == QuicRole.Client) 1 else 0
     }
 
     override fun toString(): String = "$value"
@@ -51,9 +51,9 @@ public value class QuicStreamId(public val value: Long) {
     /**
      * A factory for [stream ids][QuicStreamId]
      */
-    public class Factory(role: dimensional.quic.QuicRole) {
+    public class Factory(role: QuicRole) {
         /** The initial values of all generated Stream IDs */
-        private val initial: Int = if (role == dimensional.quic.QuicRole.Server) SERVER_INITIATED else CLIENT_INITIATED
+        private val initial: Int = if (role == QuicRole.Server) SERVER_INITIATED else CLIENT_INITIATED
 
         /** The synchronization object*/
         private val lock = SynchronizedObject()
