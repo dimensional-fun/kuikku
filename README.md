@@ -16,7 +16,7 @@ _Coming Soon!_
 _work in progress list_
 
 **Core Protocol:**
-- [ ] TLS (#1)
+- [ ] TLS [#1](https://github.com/melike2d/kuikku/issues/1)
 - [ ] Streams
   - [x] ID Generation
   - [ ] Flow Control 
