@@ -1,8 +1,5 @@
 package dimensional.quic.streams
 
-import dimensional.quic.QuicConnection
-import dimensional.quic.QuicRole
-
 public interface QuicStreamManager {
     /** The QUIC connection for this stream manager. */
     public val connection: dimensional.quic.QuicConnection

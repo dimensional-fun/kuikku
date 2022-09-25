@@ -1,8 +1,7 @@
 package dimensional.quic.streams
 
-import dimensional.quic.Quic
 import dimensional.quic.QuicRole
-import gay.quic.impl.tools.hasAnyFlags
+import dimensional.quic.impl.tools.hasAnyFlags
 import kotlinx.atomicfu.locks.SynchronizedObject
 import kotlinx.atomicfu.locks.synchronized
 import kotlin.jvm.JvmInline
