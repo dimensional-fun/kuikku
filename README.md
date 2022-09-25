@@ -16,8 +16,7 @@ _Coming Soon!_
 _work in progress list_
 
 **Core Protocol:**
-- [ ] TLS
-  - [ ] Handshake Protocol
+- [ ] TLS (#1)
 - [ ] Streams
   - [x] ID Generation
   - [ ] Flow Control 
