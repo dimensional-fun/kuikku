@@ -1,6 +1,10 @@
 plugins {
+    `maven-publish`
+
     kotlin("multiplatform")
 }
+
+group = "fun.dimensional"
 
 repositories {
     mavenCentral()
@@ -58,4 +62,62 @@ kotlin {
     }
 }
 
-tasks.named("jvmMainClasses").get().dependsOn("compileJava")
+
+tasks {
+    val jvmMainClasses by named("jvmMainClasses") {
+        dependsOn("compileJava")
+    }
+
+    publishing {
+        repositories {
+            maven("https://maven.dimensional.fun/releases") {
+                authentication {
+                    create<BasicAuthentication>("basic")
+                }
+
+                credentials {
+                    username = getConfigurationValue("REPO_ALIAS")
+                    password = getConfigurationValue("REPO_TOKEN")
+                }
+            }
+        }
+
+        publications {
+            val projectNameNormalized = project.name.capitalize()
+                .split('-')
+                .joinToString("") { it.capitalize() }
+
+            create<MavenPublication>(projectNameNormalized) {
+                from(components["kotlin"])
+
+                artifactId = project.name
+                group      = project.group
+                version    = project.version.toString()
+
+                pom {
+                    name.set(projectNameNormalized)
+
+                    organization {
+                        name.set("Dimensional Fun")
+                        url.set("https://www.dimensional.fun/")
+                    }
+
+                    developers {
+                        developer { name.set("melike2d") }
+                    }
+
+                    issueManagement {
+                        system.set("GitHub")
+                        url.set("https://github.com/melike2d/kuikku/issues")
+                    }
+
+                    scm {
+                        connection.set("scm:git:ssh://github.com/melike2d/kuikku.git")
+                        developerConnection.set("scm:git:ssh://git@github.com:melike2d/kuikku.git")
+                        url.set("https://www.dimensional.fun/")
+                    }
+                }
+            }
+        }
+    }
+}

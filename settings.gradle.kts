@@ -6,6 +6,12 @@ rootProject.name = "quic-root"
 enableFeaturePreview("VERSION_CATALOGS")
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
+/* bouncycastle port to Kotlin MPP */
+include("anzen")
+
+/* common code used throughout the project */
+include("quic-common")
+
 /* core modules used to implement the quic protocol */
 include("quic-core", "quic-tls")
 
