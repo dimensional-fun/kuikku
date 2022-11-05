@@ -70,6 +70,9 @@ fun VersionCatalogBuilder.common() {
     library("koin",        "io.insert-koin", "koin-core").versionRef(koin)
     library("koin-logger", "io.insert-koin", "koin-logger-slf4j").versionRef(koin)
 
+    /* math */
+    library("bignum", "com.ionspin.kotlin", "bignum").version("0.3.7")
+
     /* bundles */
     bundle("common", listOf(
         "kotlin-stdlib",

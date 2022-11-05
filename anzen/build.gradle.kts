@@ -7,6 +7,8 @@ version = "0.0.0"
 kotlin {
 	sourceSets["commonMain"].dependencies {
 		implementation(projects.quicCommon)
+
+		implementation(libs.bignum)
 	}
 
 	sourceSets["jvmTest"].dependencies {

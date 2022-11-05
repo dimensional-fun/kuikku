@@ -1,5 +1,6 @@
 package dimensional.quic.common
 
+import dimensional.quic.common.extensions.*
 import kotlin.experimental.or
 
 public object LittleEndian : ByteOrder() {
